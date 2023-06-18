@@ -20,6 +20,18 @@ function App() {
     console.log(notes);
   };
 
+  const onUpdateNote = (updatedNote) => {
+    //修正された新しいノートの配列を返す
+    const updateNotesArray = notes.map((note) => {
+      if (note.id === updatedNote.id) {
+        return updatedNote;
+      } else {
+        return note;
+      }
+    });
+    setNotes(updateNotesArray);
+  };
+
   const onDeleteNote = (id) => {
     console.log();
     const FilterNotes = notes.filter((note) => note.id !== id);
@@ -39,7 +51,7 @@ function App() {
         activeNote={activeNote}
         setActiveNote={setActiveNote}
       />
-      <Main activeNote={getActiveNote()} />
+      <Main activeNote={getActiveNote()} onUpdateNote={onUpdateNote} />
     </div>
   );
 }
